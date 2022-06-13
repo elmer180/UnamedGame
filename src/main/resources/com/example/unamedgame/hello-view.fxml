@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="589.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="63.0" prefWidth="589.0" style="-fx-background-color: #bcbcbc;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="52.0" prefWidth="589.0" text="UNTITLED PUZZLE PLATFORMER" textAlignment="CENTER">
+               <font>
+                  <Font name="JetBrains Mono ExtraBold" size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <bottom>
+      <HBox prefHeight="63.0" prefWidth="589.0" style="-fx-background-color: #bcbcbc;" BorderPane.alignment="CENTER" />
+   </bottom>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="50.0" style="-fx-background-color: #bcbcbc;" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <VBox prefHeight="200.0" prefWidth="50.0" style="-fx-background-color: #bcbcbc;" BorderPane.alignment="CENTER" />
+   </right>
+   <center>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="153.0" snapToPixel="false" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Button" />
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Button" />
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Button" />
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Button" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
