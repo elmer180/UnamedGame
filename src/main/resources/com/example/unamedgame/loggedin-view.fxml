@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="857.0" style="-fx-background-color: #999999;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.unamedgame.HelloController">
+    <top>
+        <HBox minHeight="-Infinity" prefHeight="63.0" prefWidth="690.0" style="-fx-background-color: #bcbcbc;" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="63.0" prefWidth="699.0" text="UNTITLED PUZZLE PLATFORMER" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font name="JetBrains Mono ExtraBold" size="36.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+    </top>
+    <left>
+        <VBox prefHeight="200.0" prefWidth="50.0" style="-fx-background-color: #bcbcbc;" BorderPane.alignment="CENTER" />
+    </left>
+    <right>
+        <VBox prefHeight="200.0" prefWidth="50.0" style="-fx-background-color: #bcbcbc;" BorderPane.alignment="CENTER" />
+    </right>
+    <center>
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="264.0" prefWidth="149.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="Playbutton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="150.0" text="Play">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Button>
+                <Label />
+                <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#loginButton" prefHeight="50.0" prefWidth="150.0" text="Ranked">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Button>
+                <Label />
+                <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Options">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Button>
+                <Label />
+                <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#exitButton" pickOnBounds="false" prefHeight="50.0" prefWidth="150.0" text="Exit">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+    </center>
+    <bottom>
+        <AnchorPane prefHeight="63.0" prefWidth="690.0" style="-fx-background-color: #bcbcbc;" BorderPane.alignment="CENTER" />
+    </bottom>
+</BorderPane>

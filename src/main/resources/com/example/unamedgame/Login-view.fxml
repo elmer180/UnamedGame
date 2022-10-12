@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="857.0" style="-fx-background-color: #999999;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.unamedgame.LoginController">
+    <top>
+        <HBox minHeight="-Infinity" prefHeight="63.0" prefWidth="690.0" style="-fx-background-color: #bcbcbc;" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="63.0" prefWidth="751.0" text="UNTITLED PUZZLE PLATFORMER" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font name="JetBrains Mono ExtraBold" size="36.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+    </top>
+    <left>
+        <VBox prefHeight="200.0" prefWidth="50.0" style="-fx-background-color: #bcbcbc;" BorderPane.alignment="CENTER" />
+    </left>
+    <right>
+        <VBox prefHeight="200.0" prefWidth="50.0" style="-fx-background-color: #bcbcbc;" BorderPane.alignment="CENTER" />
+    </right>
+    <bottom>
+        <AnchorPane prefHeight="63.0" prefWidth="690.0" style="-fx-background-color: #bcbcbc;" BorderPane.alignment="CENTER" />
+    </bottom>
+   <center>
+      <AnchorPane prefHeight="334.0" prefWidth="692.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="337.0" layoutY="14.0" prefHeight="45.0" prefWidth="125.0" snapToPixel="false" text="Login" AnchorPane.leftAnchor="337.0" AnchorPane.rightAnchor="295.0">
+               <font>
+                  <Font name="JetBrains Mono ExtraBold" size="36.0" />
+               </font>
+            </Label>
+            <TextField fx:id="user" layoutX="90.0" layoutY="96.0" prefHeight="50.0" prefWidth="600.0" promptText="Username" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="49.0">
+               <font>
+                  <Font size="24.0" />
+               </font></TextField>
+            <PasswordField fx:id="pass" layoutX="90.0" layoutY="208.0" prefHeight="50.0" prefWidth="600.0" promptText="Password" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="50.0">
+               <font>
+                  <Font size="24.0" />
+               </font></PasswordField>
+            <Label fx:id="SignUP" layoutX="557.0" layoutY="313.0" onMouseClicked="#signUp" onMouseEntered="#highlight" onMouseExited="#unhighlight" prefHeight="20.0" prefWidth="150.0" text="Not a member? Sign up" underline="false" AnchorPane.rightAnchor="50.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="fail" layoutX="494.0" layoutY="278.0" prefHeight="20.0" prefWidth="214.0" textAlignment="CENTER" textFill="#dd1616" AnchorPane.rightAnchor="49.0">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Button fx:id="Login" layoutX="351.0" layoutY="298.0" mnemonicParsing="false" onAction="#login" text="Log in" AnchorPane.rightAnchor="308.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
