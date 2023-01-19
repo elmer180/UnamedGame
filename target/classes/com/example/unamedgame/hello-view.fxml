@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="857.0" style="-fx-background-color: #999999;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.unamedgame.HelloController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #999999;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.unamedgame.HelloController">
    <top>
       <HBox minHeight="-Infinity" prefHeight="63.0" prefWidth="690.0" style="-fx-background-color: #bcbcbc;" BorderPane.alignment="CENTER">
          <children>
@@ -23,33 +27,30 @@
       <VBox prefHeight="200.0" prefWidth="50.0" style="-fx-background-color: #bcbcbc;" BorderPane.alignment="CENTER" />
    </right>
    <center>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="264.0" prefWidth="149.0" BorderPane.alignment="CENTER">
+      <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="Playbutton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" pickOnBounds="false" prefHeight="50.0" prefWidth="150.0" text="Play">
+            <Button fx:id="play" alignment="CENTER" contentDisplay="CENTER" layoutX="785.0" layoutY="132.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="150.0" prefWidth="250.0" text="Play">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Label />
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#loginButton" prefHeight="50.0" prefWidth="150.0" text="Login">
+            <Button layoutX="785.0" layoutY="312.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#loginButton" prefHeight="150.0" prefWidth="250.0" text="Login">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Label />
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Options">
+            <Button layoutX="785.0" layoutY="492.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#options" prefHeight="150.0" prefWidth="250.0" text="Options">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Label />
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#exitButton" pickOnBounds="false" prefHeight="50.0" prefWidth="150.0" text="Exit">
+            <Button layoutX="785.0" layoutY="672.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitButton" pickOnBounds="false" prefHeight="150.0" prefWidth="250.0" text="Exit">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
          </children>
-      </VBox>
+      </AnchorPane>
    </center>
    <bottom>
       <AnchorPane prefHeight="63.0" prefWidth="690.0" style="-fx-background-color: #bcbcbc;" BorderPane.alignment="CENTER" />
