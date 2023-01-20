@@ -13,6 +13,7 @@ public class HelloController {
 
 
     @FXML
+
     public void loginButton(ActionEvent event){
         try {
 
@@ -28,20 +29,6 @@ public class HelloController {
         }
 
 
-    }
-    public void options(ActionEvent event){
-        try {
-
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("options-view.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setFullScreen(true);
-            stage.setResizable(false);
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
     }
     public void exitButton(ActionEvent event){
         System.exit(0);

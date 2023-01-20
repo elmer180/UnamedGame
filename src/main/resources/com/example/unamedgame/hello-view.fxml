@@ -25,7 +25,7 @@
    <center>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="play" alignment="CENTER" contentDisplay="CENTER" layoutX="785.0" layoutY="132.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="150.0" prefWidth="250.0" text="Play">
+            <Button fx:id="play" alignment="CENTER" contentDisplay="CENTER" layoutX="785.0" layoutY="132.0" mnemonicParsing="false" onAction="#play" pickOnBounds="false" prefHeight="150.0" prefWidth="250.0" text="Play">
                <font>
                   <Font size="24.0" />
                </font>
