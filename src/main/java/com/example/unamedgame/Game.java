@@ -44,8 +44,6 @@ public class Game extends Application {
     private void levelcheck(int i){
         if (levelno == 1){
             line = LevelData.Level1[i];
-
-
         }
        if (levelno == 2){
             line = LevelData.Level2[i];
@@ -56,6 +54,7 @@ public class Game extends Application {
         if (levelno == 3){
             line = LevelData.Level3[i];
             box.setTranslateX(900);
+            box.setTranslateY(50);
         }
     }
     private void refresh(){
