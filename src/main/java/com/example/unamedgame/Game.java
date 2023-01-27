@@ -133,7 +133,7 @@ public class Game extends Application {
             movePlayerX(5);
         }
         if (isPressed(KeyCode.H)) {
-            if (time > toggle + 500) {
+            if (time > toggle + 100) {
                 if (timeStop == true){
                     timeStop=false;
                 } else {timeStop=true;}
