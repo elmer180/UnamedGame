@@ -38,7 +38,6 @@ public class Game extends Application {
     private boolean timeStop = false;
     private int levelWidth;
 
-    private boolean levelcreate =false;
     private int levelno;
     private String line;
 
@@ -50,13 +49,13 @@ public class Game extends Application {
         }
        if (levelno == 2){
             line = LevelData.Level2[i];
-            if (levelcreate=true){
-                box.setTranslateX(90);
-                box.setTranslateY(950);
-            }
+            box.setTranslateX(90);
+            box.setTranslateY(950);
+
        }
         if (levelno == 3){
             line = LevelData.Level3[i];
+            box.setTranslateX(900);
         }
     }
     private void refresh(){
@@ -96,8 +95,7 @@ public class Game extends Application {
                         Node lose = createEntity(j * 60, i * 60, 60, 60, Color.RED);
                         kill.add(lose);
                 }
-            }levelcreate=true;
-            levelcheck(0);
+            }
         }
     }
     private void initContent() {
