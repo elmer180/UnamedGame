@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class LoginController {
@@ -56,6 +57,19 @@ public class LoginController {
             while (myReader.hasNextLine() && (!valid)) {
                 if (check.equals(account)) {
                     valid = (true);
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("loggedin-view.fxml"));
+                    Parent root = null;
+                    try {
+                        root = (Parent) fxmlLoader.load();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    Stage stage = new Stage();
+                    stage.setFullScreen(true);
+                    stage.setResizable(false);
+                    stage.setScene(new Scene(root));
+                    stage.show();
 
                 }
                 else {

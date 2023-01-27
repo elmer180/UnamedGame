@@ -30,7 +30,7 @@
                         <Font size="24.0" />
                     </font>
                 </Button>
-                <Button layoutX="785.0" layoutY="312.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#loginButton" prefHeight="150.0" prefWidth="250.0" text="Ranked">
+                <Button layoutX="785.0" layoutY="312.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="150.0" prefWidth="250.0" text="Ranked">
                     <font>
                         <Font size="24.0" />
                     </font>
