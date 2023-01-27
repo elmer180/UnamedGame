@@ -25,6 +25,7 @@ public class Game extends Application {
     private ArrayList<Node> platforms = new ArrayList<>();
     private ArrayList<Node> goal = new ArrayList<>();
     private ArrayList<Node> kill = new ArrayList<>();
+    private ArrayList<Node> item = new ArrayList<>();
 
     private Pane appRoot = new Pane();
     private Pane gameRoot = new Pane();
@@ -56,6 +57,53 @@ public class Game extends Application {
             box.setTranslateX(900);
             box.setTranslateY(50);
         }
+        if (levelno == 4){
+            line = LevelData.Level4[i];
+            line = LevelData.Level4[i];
+            box.setTranslateX(90);
+            box.setTranslateY(950);
+
+        }
+        /*if (levelno == 5){
+            line = LevelData.Level2[i];
+            box.setTranslateX(90);
+            box.setTranslateY(950);
+
+        }
+        if (levelno == 6){
+            line = LevelData.Level2[i];
+            box.setTranslateX(90);
+            box.setTranslateY(950);
+
+        }
+        if (levelno == 7){
+            line = LevelData.Level2[i];
+            box.setTranslateX(90);
+            box.setTranslateY(950);
+
+        }
+        if (levelno == 8){
+            line = LevelData.Level2[i];
+            box.setTranslateX(90);
+            box.setTranslateY(950);
+
+        }
+        if (levelno == 9){
+            line = LevelData.Level2[i];
+            box.setTranslateX(90);
+            box.setTranslateY(950);
+
+        }
+        if (levelno == 10){
+            line = LevelData.Level2[i];
+            box.setTranslateX(90);
+            box.setTranslateY(950);
+
+        }
+        if (levelno == 11){
+
+
+        }*/
     }
     private void refresh(){
         for (Node platform : platforms) {
@@ -93,6 +141,11 @@ public class Game extends Application {
                     case '3':
                         Node lose = createEntity(j * 60, i * 60, 60, 60, Color.RED);
                         kill.add(lose);
+                        break;
+                    case '4':
+                        Node collect = createEntity(j * 60, i * 60, 50, 50, Color.GOLD);
+                        item.add(collect);
+                        break;
                 }
             }
         }
@@ -205,7 +258,7 @@ public class Game extends Application {
                             return;
                         }
                     } else {
-                        if ((player.getTranslateX() == platform.getTranslateX() + 40) && (player.getTranslateY() + 40 != platform.getTranslateY()) || ((player.getTranslateX() - 40 == box.getTranslateX()) && (player.getTranslateY() == box.getTranslateY()))) {
+                        if ((player.getTranslateX() == platform.getTranslateX() + 60) && (player.getTranslateY() + 40 != platform.getTranslateY()) || ((player.getTranslateX() - 40 == box.getTranslateX()) && (player.getTranslateY() == box.getTranslateY()))) {
                             return;
                         }
                     }
