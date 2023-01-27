@@ -34,6 +34,6 @@ public class HelloController {
         System.exit(0);
     }
     public void play(ActionEvent event){
-
+        Game g = new Game();
     }
 }

@@ -344,6 +344,7 @@ public class Game extends Application {
         primaryStage.setTitle("unamed game");
         primaryStage.setScene(scene);
         primaryStage.setFullScreen(true);
+        primaryStage.setFullScreen(true);
         primaryStage.show();
 
         AnimationTimer timer = new AnimationTimer() {
@@ -353,9 +354,5 @@ public class Game extends Application {
             }
         };
         timer.start();
-    }
-
-    public static void main(String[] game) {
-        launch(game);
     }
 }
