@@ -27,8 +27,6 @@ public class HelloController {
         } catch(Exception e) {
             e.printStackTrace();
         }
-
-
     }
     public void exitButton(ActionEvent event){
         System.exit(0);

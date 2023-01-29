@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,86 +25,108 @@ public class Game extends Application {
     private ArrayList<Node> goal = new ArrayList<>();
     private ArrayList<Node> kill = new ArrayList<>();
     private ArrayList<Node> item = new ArrayList<>();
-
+    private ArrayList<Node> button = new ArrayList<>();
+    private ArrayList<Node> door = new ArrayList<>();
+    private ArrayList<Node> door2 = new ArrayList<>();
     private Pane appRoot = new Pane();
     private Pane gameRoot = new Pane();
     private Pane uiRoot = new Pane();
-
-    private boolean death = false;
     private Node player;
     private Node box;
     private Point2D playerVelocity = new Point2D(0, 0);
     private boolean canJump = true;
     private boolean timeStop = false;
+    private boolean dooropen = false;
+    private boolean walking = false;
+    private boolean right = false;
     private int levelWidth;
-
     private int levelno;
     private String line;
 
-    private void levelcheck(int i){
-        if (levelno == 1){
+    private void levelcheck(int i) {
+        if (levelno == 1) {
             line = LevelData.Level1[i];
         }
-       if (levelno == 2){
+        if (levelno == 2) {
             line = LevelData.Level2[i];
+            player.setTranslateX(1805);
+            player.setTranslateY(980);
             box.setTranslateX(90);
-            box.setTranslateY(950);
+            box.setTranslateY(980);
 
-       }
-        if (levelno == 3){
+        }
+        if (levelno == 3) {
             line = LevelData.Level3[i];
+            player.setTranslateX(90);
+            player.setTranslateY(260);
             box.setTranslateX(900);
             box.setTranslateY(50);
         }
-        if (levelno == 4){
+        if (levelno == 4) {
             line = LevelData.Level4[i];
-            line = LevelData.Level4[i];
+            player.setTranslateX(1800);
+            player.setTranslateY(980);
+            box.setTranslateX(1305);
+            box.setTranslateY(800);
+
+        }
+        if (levelno == 5) {
+            line = LevelData.Level5[i];
+            player.setTranslateX(90);
+            player.setTranslateY(800);
+            box.setTranslateX(200);
+            box.setTranslateY(800);
+
+        }
+        if (levelno == 6) {
+            line = LevelData.Level6[i];
+            walking = true;
+            player.setTranslateX(90);
+            player.setTranslateY(740);
+            box.setTranslateX(1080);
+            box.setTranslateY(950);
+
+        }
+        if (levelno == 7) {
+            line = LevelData.Level7[i];
+            walking = false;
+            player.setTranslateX(90);
+            player.setTranslateY(950);
             box.setTranslateX(90);
             box.setTranslateY(950);
 
         }
-        /*if (levelno == 5){
-            line = LevelData.Level2[i];
+        if (levelno == 8) {
+            line = LevelData.Level8[i];
+            player.setTranslateX(90);
+            player.setTranslateY(950);
             box.setTranslateX(90);
             box.setTranslateY(950);
 
         }
-        if (levelno == 6){
-            line = LevelData.Level2[i];
+        if (levelno == 9) {
+            line = LevelData.Level9[i];
+            player.setTranslateX(90);
+            player.setTranslateY(950);
             box.setTranslateX(90);
             box.setTranslateY(950);
 
         }
-        if (levelno == 7){
-            line = LevelData.Level2[i];
+        if (levelno == 10) {
+            line = LevelData.Level10[i];
+            player.setTranslateX(90);
+            player.setTranslateY(950);
             box.setTranslateX(90);
             box.setTranslateY(950);
 
         }
-        if (levelno == 8){
-            line = LevelData.Level2[i];
-            box.setTranslateX(90);
-            box.setTranslateY(950);
+        if (levelno == 11) {
+
 
         }
-        if (levelno == 9){
-            line = LevelData.Level2[i];
-            box.setTranslateX(90);
-            box.setTranslateY(950);
-
-        }
-        if (levelno == 10){
-            line = LevelData.Level2[i];
-            box.setTranslateX(90);
-            box.setTranslateY(950);
-
-        }
-        if (levelno == 11){
-
-
-        }*/
     }
-    private void refresh(){
+
+    private void refresh() {
         for (Node platform : platforms) {
             gameRoot.getChildren().remove(platform);
         }
@@ -115,14 +136,27 @@ public class Game extends Application {
         for (Node lose : kill) {
             gameRoot.getChildren().remove(lose);
         }
+        for (Node collect : item) {
+            gameRoot.getChildren().remove(collect);
+        }
+        for (Node gate : door) {
+            gameRoot.getChildren().remove(gate);
+        }
+        for (Node press : button) {
+            gameRoot.getChildren().remove(press);
+        }
+        button.clear();
         platforms.clear();
         goal.clear();
+        item.clear();
         kill.clear();
+        door.clear();
         levelcreate();
 
 
     }
-    private void levelcreate(){
+
+    private void levelcreate() {
         levelWidth = LevelData.Level1[0].length() * 60;
         for (int i = 0; i < LevelData.Level1.length; i++) {
             levelcheck(i);
@@ -146,24 +180,53 @@ public class Game extends Application {
                         Node collect = createEntity(j * 60, i * 60, 50, 50, Color.GOLD);
                         item.add(collect);
                         break;
+                    case '5':
+                        Node press = createEntity(j * 60, i * 63, 60, 30, Color.DARKRED);
+                        button.add(press);
+                        break;
+                    case '6':
+                        Node gate = createEntity(j * 60, i * 60, 60, 60, Color.INDIANRED);
+                        door.add(gate);
+                        break;
+                    case '7':
+                        Node agate = createEntity(j * 60, i * 60, 60, 60, Color.ORANGERED);
+                        door2.add(agate);
+                        break;
                 }
             }
         }
     }
+
     private void initContent() {
-        levelno=1;
+        levelno = 1;
         Rectangle bg = new Rectangle(1920, 1080);
         levelcreate();
-        player = createEntity(80, 950, 40, 40, Color.YELLOW);
+        player = createEntity(80, 980, 40, 40, Color.YELLOW);
         box = createEntity(900, 800, 40, 40, Color.DARKGRAY);
         appRoot.getChildren().addAll(bg, gameRoot, uiRoot);
     }
 
 
-
     private void update() {
         long blinkcd = 500; // 500 milliseconds
         long time = System.currentTimeMillis();
+        if (isPressed(KeyCode.F3)) {
+            System.out.println(player.getTranslateX());
+            System.out.println(player.getTranslateY());
+        }
+        if (isPressed(KeyCode.PAGE_UP)) {
+            if (time > toggle + 100) {
+                levelno = (levelno + 1);
+                refresh();
+                toggle = time;
+            }
+        }
+        if (isPressed(KeyCode.R)) {
+            if (time > toggle + 100) {
+                refresh();
+                toggle = time;
+            }
+        }
         if (isPressed(KeyCode.W) && player.getTranslateY() >= 5) {
             jumpPlayer();
         }
@@ -187,9 +250,11 @@ public class Game extends Application {
         }
         if (isPressed(KeyCode.H)) {
             if (time > toggle + 100) {
-                if (timeStop == true){
-                    timeStop=false;
-                } else {timeStop=true;}
+                if (timeStop == true) {
+                    timeStop = false;
+                } else {
+                    timeStop = true;
+                }
                 toggle = time;
             }
         }
@@ -200,13 +265,13 @@ public class Game extends Application {
         MoveboxY();
         for (Node win : goal) {
             if (player.getBoundsInParent().intersects(win.getBoundsInParent())) {
-                levelno = (levelno+1);
+                levelno = (levelno + 1);
                 refresh();
             }
         }
         for (Node lose : kill) {
             if (player.getBoundsInParent().intersects(lose.getBoundsInParent())) {
-                death= true;
+                refresh();
             }
         }
         for (Node platform : platforms) {
@@ -217,8 +282,55 @@ public class Game extends Application {
                 MoveboxX(-5);
             }
         }
-        if (death==true) {System.exit(1);}
-        if (player.getTranslateY()>=1080){death=true;}
+        if (player.getTranslateY() >= 1080) {
+            refresh();
+        }
+        for (Node press : button) {
+            if (box.getBoundsInParent().intersects(press.getBoundsInParent()) || (player.getBoundsInParent().intersects(press.getBoundsInParent()))) {
+                dooropen = true;
+            } else {
+                dooropen = false;
+            }
+        }
+        for (Node gate : door) {
+            if (dooropen == true) {
+                gate.setVisible(false);
+            } else {
+                gate.setVisible(true);
+            }
+            if (player.getBoundsInParent().intersects(gate.getBoundsInParent()) && (dooropen == false)) {
+                refresh();
+            }
+            for (Node agate : door2) {
+                if (dooropen == false) {
+                    agate.setVisible(false);
+                } else {
+                    agate.setVisible(true);
+                }
+                if (player.getBoundsInParent().intersects(agate.getBoundsInParent()) && (dooropen == true)) {
+                    refresh();
+                }
+            }
+        }
+        if (walking == true) {
+            for (Node platform : platforms) {
+                if (box.getBoundsInParent().intersects(platform.getBoundsInParent())) {
+                    if (box.getTranslateX() + 40 == platform.getTranslateX() && (box.getTranslateY() + 40 != platform.getTranslateY())) {
+                        right = false;
+                    }
+                    if (box.getTranslateX() - 60 == platform.getTranslateX() && (box.getTranslateY() + 40 != platform.getTranslateY())) {
+                        right = true;
+                    }
+                }
+            }
+            if (timeStop == false) {
+                if (right) {
+                    MoveboxX(1);
+                } else {
+                    MoveboxX(-1);
+                }
+            }
+        }
     }
 
 
@@ -239,8 +351,10 @@ public class Game extends Application {
                 }
             }
             player.setTranslateX(player.getTranslateX() + (movingRight ? 1 : -1));
+
         }
     }
+
 
     private void MoveboxX(int value) {
         boolean movingRight = value > 0;
@@ -287,10 +401,10 @@ public class Game extends Application {
                     if (((player.getTranslateY() + 40 == (box.getTranslateY()) && (player.getTranslateX() - 36 <= box.getTranslateX()) && (player.getTranslateX() + 36 >= box.getTranslateX())))) {
                         player.setTranslateY(player.getTranslateY() - 300);
                         return;
-                    }else {
-                        if (((player.getTranslateY() - 40 == (box.getTranslateY()) && (player.getTranslateX() - 36 <= box.getTranslateX()) && (player.getTranslateX() + 36 >= box.getTranslateX()&&(player.getTranslateY() +40 !=platform.getTranslateY()))))) {
-                            player.setTranslateY(player.getTranslateY() +1);
-                           return;
+                    } else {
+                        if (((player.getTranslateY() - 40 == (box.getTranslateY()) && (player.getTranslateX() - 36 <= box.getTranslateX()) && (player.getTranslateX() + 36 >= box.getTranslateX() && (player.getTranslateY() + 40 != platform.getTranslateY()))))) {
+                            player.setTranslateY(player.getTranslateY() + 1);
+                            return;
                         }
                     }
                 }
