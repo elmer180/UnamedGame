@@ -1,11 +1,8 @@
 package com.example.unamedgame;
 
 import javafx.animation.AnimationTimer;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -21,7 +18,8 @@ public class Game {
     long toggle = 0;//variable used to allow abilities to be toggled
     long lastBlink = 0;
 
-    public int collected = 0;
+    public long starttime = System.currentTimeMillis();
+    public long points = 0;
 
     //maps keycode to boolean - keycode is the javafx enumeration
     private HashMap<KeyCode, Boolean> keys = new HashMap<KeyCode, Boolean>();
@@ -143,7 +141,8 @@ public class Game {
 
         }
         if (levelno == 11) {
-
+            points= (points+((starttime-System.currentTimeMillis()+1000000)/10));
+            System.out.println(points);
 
         }
     }
@@ -251,6 +250,8 @@ public class Game {
 
 
     private void update() {
+
+
         long blinkcd = 500; // 500 milliseconds
         long time = System.currentTimeMillis();
         if (isPressed(KeyCode.F3)) {
@@ -408,7 +409,7 @@ public class Game {
 
         for (Node collect:item){
             if(player.getBoundsInParent().intersects(collect.getBoundsInParent())){
-                collected= collected+1;
+                points= points+1000;
                 gameRoot.getChildren().remove(collect);
                 item.clear();
             }
