@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class Game extends Application {
+public class Game {
     long toggle = 0;//variable used to allow abilities to be toggled
     long lastBlink = 0;
 
@@ -540,8 +540,4 @@ public class Game extends Application {
             e.printStackTrace();
         }
     }
-    @Override
-    public void start(Stage primaryStage){
-    }
-
 }

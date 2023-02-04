@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class LoginController {
+    public String username;
+    public String password;
     @FXML
     private Label fail;
     @FXML
@@ -49,16 +51,16 @@ public class LoginController {
         Scanner myReader = null;
         try {
             myReader = new Scanner(logons);
-            String username = (user.getText());
-            String password = (pass.getText());
+            username = (user.getText());
+            password = (pass.getText());
             String account = username+ " " +password;
             String check = ("");
             boolean valid = (false);
             while (myReader.hasNextLine() && (!valid)) {
                 if (check.equals(account)) {
                     valid = (true);
-                    //open game
-
+                    Game g = new Game();
+                    g.load();
                 }
                 else {
                     check = myReader.nextLine();
