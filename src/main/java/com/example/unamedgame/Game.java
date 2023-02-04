@@ -21,6 +21,8 @@ public class Game {
     long toggle = 0;//variable used to allow abilities to be toggled
     long lastBlink = 0;
 
+    public int collected = 0;
+
     //maps keycode to boolean - keycode is the javafx enumeration
     private HashMap<KeyCode, Boolean> keys = new HashMap<KeyCode, Boolean>();
     private ArrayList<Node> platforms = new ArrayList<>();
@@ -48,8 +50,23 @@ public class Game {
     private String line;
 
     private void levelcheck(int i) {
+        if (levelno == 0) {
+            levelno=1;
+            line = LevelData.Level1[i];
+            player.setTranslateX(80);
+            player.setTranslateY(980);
+            box.setTranslateX(900);
+            box.setTranslateY(800);
+        }
         if (levelno == 1) {
             line = LevelData.Level1[i];
+            try {
+                player.setTranslateX(80);
+                player.setTranslateY(980);
+                box.setTranslateX(900);
+                box.setTranslateY(800);
+            }catch (Exception e){
+            }
         }
         if (levelno == 2) {
             line = LevelData.Level2[i];
@@ -241,8 +258,15 @@ public class Game {
             System.out.println(player.getTranslateY());
         }
         if (isPressed(KeyCode.PAGE_UP)) {
-            if (time > toggle + 100) {
+            if (time > toggle + 1000) {
                 levelno = (levelno + 1);
+                refresh();
+                toggle = time;
+            }
+        }
+        if (isPressed(KeyCode.PAGE_DOWN)) {
+            if (time > toggle + 1000) {
+                levelno = (levelno - 1);
                 refresh();
                 toggle = time;
             }
@@ -275,7 +299,7 @@ public class Game {
             movePlayerX(5);
         }
         if (isPressed(KeyCode.H)) {
-            if (time > toggle + 100) {
+            if (time > toggle + 300) {
                 if (timeStop == true) {
                     timeStop = false;
                 } else {
@@ -380,6 +404,14 @@ public class Game {
                 }
             }
 
+        }
+
+        for (Node collect:item){
+            if(player.getBoundsInParent().intersects(collect.getBoundsInParent())){
+                collected= collected+1;
+                gameRoot.getChildren().remove(collect);
+                item.clear();
+            }
         }
         if (walking == true) {
             for (Node platform : platforms) {
