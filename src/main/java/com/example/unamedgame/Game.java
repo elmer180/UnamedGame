@@ -28,6 +28,8 @@ public class Game extends Application {
     private ArrayList<Node> button = new ArrayList<>();
     private ArrayList<Node> door = new ArrayList<>();
     private ArrayList<Node> door2 = new ArrayList<>();
+    private ArrayList<Node> portal1 = new ArrayList<>();
+    private ArrayList<Node> portal2 = new ArrayList<>();
     private Pane appRoot = new Pane();
     private Pane gameRoot = new Pane();
     private Pane uiRoot = new Pane();
@@ -51,7 +53,7 @@ public class Game extends Application {
             line = LevelData.Level2[i];
             player.setTranslateX(1805);
             player.setTranslateY(980);
-            box.setTranslateX(90);
+            box.setTranslateX(120);
             box.setTranslateY(980);
 
         }
@@ -73,13 +75,22 @@ public class Game extends Application {
         if (levelno == 5) {
             line = LevelData.Level5[i];
             player.setTranslateX(90);
-            player.setTranslateY(800);
-            box.setTranslateX(200);
-            box.setTranslateY(800);
+            player.setTranslateY(950);
+            box.setTranslateX(600);
+            box.setTranslateY(950);
 
         }
         if (levelno == 6) {
             line = LevelData.Level6[i];
+            player.setTranslateX(90);
+            player.setTranslateY(800);
+            box.setTranslateX(200);
+            box.setTranslateY(800);
+
+
+        }
+        if (levelno == 7) {
+            line = LevelData.Level7[i];
             walking = true;
             player.setTranslateX(90);
             player.setTranslateY(740);
@@ -87,37 +98,29 @@ public class Game extends Application {
             box.setTranslateY(950);
 
         }
-        if (levelno == 7) {
-            line = LevelData.Level7[i];
+        if (levelno == 8) {
+            line = LevelData.Level8[i];
             walking = false;
             player.setTranslateX(90);
             player.setTranslateY(950);
-            box.setTranslateX(90);
+            box.setTranslateX(300);
             box.setTranslateY(950);
-
-        }
-        if (levelno == 8) {
-            line = LevelData.Level8[i];
-            player.setTranslateX(90);
-            player.setTranslateY(950);
-            box.setTranslateX(90);
-            box.setTranslateY(950);
-
         }
         if (levelno == 9) {
             line = LevelData.Level9[i];
-            player.setTranslateX(90);
+            walking=true;
+            player.setTranslateX(370);
             player.setTranslateY(950);
-            box.setTranslateX(90);
-            box.setTranslateY(950);
+            box.setTranslateX(930);
+            box.setTranslateY(620);
 
         }
         if (levelno == 10) {
             line = LevelData.Level10[i];
-            player.setTranslateX(90);
+            player.setTranslateX(370);
             player.setTranslateY(950);
-            box.setTranslateX(90);
-            box.setTranslateY(950);
+            box.setTranslateX(1705);
+            box.setTranslateY(140);
 
         }
         if (levelno == 11) {
@@ -145,12 +148,25 @@ public class Game extends Application {
         for (Node press : button) {
             gameRoot.getChildren().remove(press);
         }
+        for (Node agate : door2) {
+            gameRoot.getChildren().remove(agate);
+        }
+        for (Node portB : portal1) {
+            gameRoot.getChildren().remove(portB);
+        }
+        for (Node portO : portal2) {
+            gameRoot.getChildren().remove(portO);
+        }
+        right=false;
         button.clear();
         platforms.clear();
         goal.clear();
         item.clear();
         kill.clear();
         door.clear();
+        door2.clear();
+        portal1.clear();
+        portal2.clear();
         levelcreate();
 
 
@@ -189,8 +205,16 @@ public class Game extends Application {
                         door.add(gate);
                         break;
                     case '7':
-                        Node agate = createEntity(j * 60, i * 60, 60, 60, Color.ORANGERED);
+                        Node agate = createEntity(j * 60, i * 60, 60, 60, Color.INDIANRED);
                         door2.add(agate);
+                        break;
+                    case '8':
+                        Node portB = createEntity(j * 60, i * 60, 60, 60, Color.DARKBLUE);
+                        portal1.add(portB);
+                        break;
+                    case '9':
+                        Node porto = createEntity(j * 60, i * 60, 60, 60, Color.ORANGE);
+                        portal2.add(porto);
                         break;
                 }
             }
@@ -258,6 +282,8 @@ public class Game extends Application {
                 toggle = time;
             }
         }
+
+
         if (playerVelocity.getY() < 10) {
             playerVelocity = playerVelocity.add(0, 1);
         }
@@ -276,10 +302,11 @@ public class Game extends Application {
         }
         for (Node platform : platforms) {
             if (player.getTranslateX() + 35 == box.getTranslateX() && (player.getTranslateY() <= box.getTranslateY() + 40) && ((player.getTranslateY() >= box.getTranslateY() - 40))) {
-                MoveboxX(5);
+                if (walking==false){MoveboxX(5);}else{player.setTranslateY(player.getTranslateY()-5);}
+
             }
             if ((player.getTranslateX() == box.getTranslateX() + 35) && (player.getTranslateY() <= box.getTranslateY() + 40) && ((player.getTranslateY() >= box.getTranslateY() - 40))) {
-                MoveboxX(-5);
+                if (walking==false){MoveboxX(-5);}else{player.setTranslateY(player.getTranslateY()-5);}
             }
         }
         if (player.getTranslateY() >= 1080) {
@@ -311,6 +338,36 @@ public class Game extends Application {
                     refresh();
                 }
             }
+        }
+        for(Node portB : portal1){
+            if(box.getBoundsInParent().intersects(portB.getBoundsInParent())){
+                for(Node portO : portal2){
+                    box.setTranslateX(portO.getTranslateX()+110);
+                    box.setTranslateY(portO.getTranslateY());
+                }
+            }
+            if(player.getBoundsInParent().intersects(portB.getBoundsInParent())){
+                for(Node portO : portal2){
+                    player.setTranslateX(portO.getTranslateX()+65);
+                    player.setTranslateY(portO.getTranslateY());
+                }
+            }
+
+        }
+        for(Node portO : portal2){
+            if(box.getBoundsInParent().intersects(portO.getBoundsInParent())){
+                for(Node portB : portal1){
+                    box.setTranslateX(portB.getTranslateX()-110);
+                    box.setTranslateY(portB.getTranslateY());
+                }
+            }
+            if(player.getBoundsInParent().intersects(portO.getBoundsInParent())){
+                for(Node portB : portal1){
+                    player.setTranslateX(portB.getTranslateX()-60);
+                    player.setTranslateY(portB.getTranslateY());
+                }
+            }
+
         }
         if (walking == true) {
             for (Node platform : platforms) {
@@ -469,4 +526,5 @@ public class Game extends Application {
         };
         timer.start();
     }
+
 }
