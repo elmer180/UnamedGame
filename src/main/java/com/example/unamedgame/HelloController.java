@@ -33,6 +33,7 @@ public class HelloController {
     }
     public void play(ActionEvent event){
         Game g = new Game();
+        g.load();
 
     }   
 }

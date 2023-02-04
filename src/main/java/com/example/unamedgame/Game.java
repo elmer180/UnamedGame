@@ -2,8 +2,10 @@ package com.example.unamedgame;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -108,7 +110,7 @@ public class Game extends Application {
         }
         if (levelno == 9) {
             line = LevelData.Level9[i];
-            walking=true;
+            walking = true;
             player.setTranslateX(370);
             player.setTranslateY(950);
             box.setTranslateX(930);
@@ -157,7 +159,7 @@ public class Game extends Application {
         for (Node portO : portal2) {
             gameRoot.getChildren().remove(portO);
         }
-        right=false;
+        right = false;
         button.clear();
         platforms.clear();
         goal.clear();
@@ -277,7 +279,9 @@ public class Game extends Application {
                 if (timeStop == true) {
                     timeStop = false;
                 } else {
-                    timeStop = true;
+                    if (levelno != 9) {
+                        timeStop = true;
+                    }
                 }
                 toggle = time;
             }
@@ -302,11 +306,19 @@ public class Game extends Application {
         }
         for (Node platform : platforms) {
             if (player.getTranslateX() + 35 == box.getTranslateX() && (player.getTranslateY() <= box.getTranslateY() + 40) && ((player.getTranslateY() >= box.getTranslateY() - 40))) {
-                if (walking==false){MoveboxX(5);}else{player.setTranslateY(player.getTranslateY()-5);}
+                if (walking == false) {
+                    MoveboxX(5);
+                } else {
+                    player.setTranslateY(player.getTranslateY() - 5);
+                }
 
             }
             if ((player.getTranslateX() == box.getTranslateX() + 35) && (player.getTranslateY() <= box.getTranslateY() + 40) && ((player.getTranslateY() >= box.getTranslateY() - 40))) {
-                if (walking==false){MoveboxX(-5);}else{player.setTranslateY(player.getTranslateY()-5);}
+                if (walking == false) {
+                    MoveboxX(-5);
+                } else {
+                    player.setTranslateY(player.getTranslateY() - 5);
+                }
             }
         }
         if (player.getTranslateY() >= 1080) {
@@ -339,31 +351,31 @@ public class Game extends Application {
                 }
             }
         }
-        for(Node portB : portal1){
-            if(box.getBoundsInParent().intersects(portB.getBoundsInParent())){
-                for(Node portO : portal2){
-                    box.setTranslateX(portO.getTranslateX()+110);
+        for (Node portB : portal1) {
+            if (box.getBoundsInParent().intersects(portB.getBoundsInParent())) {
+                for (Node portO : portal2) {
+                    box.setTranslateX(portO.getTranslateX() + 110);
                     box.setTranslateY(portO.getTranslateY());
                 }
             }
-            if(player.getBoundsInParent().intersects(portB.getBoundsInParent())){
-                for(Node portO : portal2){
-                    player.setTranslateX(portO.getTranslateX()+65);
+            if (player.getBoundsInParent().intersects(portB.getBoundsInParent())) {
+                for (Node portO : portal2) {
+                    player.setTranslateX(portO.getTranslateX() + 65);
                     player.setTranslateY(portO.getTranslateY());
                 }
             }
 
         }
-        for(Node portO : portal2){
-            if(box.getBoundsInParent().intersects(portO.getBoundsInParent())){
-                for(Node portB : portal1){
-                    box.setTranslateX(portB.getTranslateX()-110);
+        for (Node portO : portal2) {
+            if (box.getBoundsInParent().intersects(portO.getBoundsInParent())) {
+                for (Node portB : portal1) {
+                    box.setTranslateX(portB.getTranslateX() - 110);
                     box.setTranslateY(portB.getTranslateY());
                 }
             }
-            if(player.getBoundsInParent().intersects(portO.getBoundsInParent())){
-                for(Node portB : portal1){
-                    player.setTranslateX(portB.getTranslateX()-60);
+            if (player.getBoundsInParent().intersects(portO.getBoundsInParent())) {
+                for (Node portB : portal1) {
+                    player.setTranslateX(portB.getTranslateX() - 60);
                     player.setTranslateY(portB.getTranslateY());
                 }
             }
@@ -505,26 +517,31 @@ public class Game extends Application {
     private boolean isPressed(KeyCode key) {
         return keys.getOrDefault(key, false);
     }
+    public void load(){
+       try {
+            initContent();
+            Scene scene = new Scene(appRoot);
+            scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
+            scene.setOnKeyReleased(event -> keys.put(event.getCode(), false));
+            Stage stage = new Stage();
+            stage.setFullScreen(true);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
 
+           AnimationTimer timer = new AnimationTimer() {
+               @Override
+               public void handle(long now) {
+                   update();
+               }
+           };
+           timer.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        initContent();
-        Scene scene = new Scene(appRoot);
-        scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
-        scene.setOnKeyReleased(event -> keys.put(event.getCode(), false));
-        primaryStage.setTitle("unamed game");
-        primaryStage.setScene(scene);
-        primaryStage.setFullScreen(true);
-        primaryStage.setFullScreen(true);
-        primaryStage.show();
-
-        AnimationTimer timer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                update();
-            }
-        };
-        timer.start();
+    public void start(Stage primaryStage){
     }
 
 }
