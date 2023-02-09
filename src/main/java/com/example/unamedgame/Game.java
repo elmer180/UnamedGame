@@ -175,6 +175,7 @@ public class Game {
         for (Node portO : portal2) {
             gameRoot.getChildren().remove(portO);
         }
+        timeStop= false;
         right = false;
         button.clear();
         platforms.clear();
