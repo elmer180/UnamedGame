@@ -1,6 +1,7 @@
 package com.example.unamedgame;
 
 public class LevelData {
+    //used to design a level. each value represents a certain entity. for example 0 is air 1 is walls/floor and 2 is the goal the player needs to reach
     public static final String[] Level1 = new String[]{
        "11111111111111111111111111111111",
        "10000000000000000000000000000001",

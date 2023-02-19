@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class HelloController {
 
-
+    //main menu screen
     @FXML
 
     public void loginButton(ActionEvent event){

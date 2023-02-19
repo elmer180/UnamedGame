@@ -17,8 +17,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class LoginController {
-    public String username;
-    public String password;
     @FXML
     private Label fail;
     @FXML
@@ -27,9 +25,10 @@ public class LoginController {
     private TextField user;
     @FXML
     private PasswordField pass;
+    public String username;
+    public String password;
 
     private static File logons = new File("logins.txt");
-
 
     public void signUp(MouseEvent action) {
         try {
@@ -47,12 +46,15 @@ public class LoginController {
         }
     }
 
-    public void login(ActionEvent event) {
+    //logs player in if conditions are met
+    public void login(ActionEvent event) throws Exception {
         Scanner myReader = null;
         try {
             myReader = new Scanner(logons);
+            signUpController hasher = new signUpController();
             username = (user.getText());
-            password = (pass.getText());
+            //hashes password imput and compares it to the already hashed stored password
+            password = (hasher.hash(pass.getText()));
             String account = username+ " " +password;
             String check = ("");
             boolean valid = (false);

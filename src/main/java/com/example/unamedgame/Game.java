@@ -1,8 +1,10 @@
 package com.example.unamedgame;
 
 import javafx.animation.AnimationTimer;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -47,6 +49,7 @@ public class Game {
     private int levelno;
     private String line;
 
+    //used to check what level the player is moving to
     private void levelcheck(int i) {
         if (levelno == 0) {
             levelno=1;
@@ -140,13 +143,8 @@ public class Game {
             box.setTranslateY(140);
 
         }
-        if (levelno == 11) {
-            points= (points+((starttime-System.currentTimeMillis()+1000000)/10));
-            System.out.println(points);
-
-        }
     }
-
+    //clears the current level and generates the new one
     private void refresh() {
         for (Node platform : platforms) {
             gameRoot.getChildren().remove(platform);
@@ -186,11 +184,13 @@ public class Game {
         door2.clear();
         portal1.clear();
         portal2.clear();
-        levelcreate();
+        if (levelno==11){
+            points= (points+((starttime-System.currentTimeMillis()+1000000)/10));
 
-
+            lead();
+        }else { levelcreate();}
     }
-
+    //method that generates the new level
     private void levelcreate() {
         levelWidth = LevelData.Level1[0].length() * 60;
         for (int i = 0; i < LevelData.Level1.length; i++) {
@@ -239,7 +239,7 @@ public class Game {
             }
         }
     }
-
+    //creates the playing field and the player
     private void initContent() {
         levelno = 1;
         Rectangle bg = new Rectangle(1920, 1080);
@@ -249,7 +249,7 @@ public class Game {
         appRoot.getChildren().addAll(bg, gameRoot, uiRoot);
     }
 
-
+    //checks if conditions have been met and acts accordingly
     private void update() {
 
 
@@ -260,14 +260,14 @@ public class Game {
             System.out.println(player.getTranslateY());
         }
         if (isPressed(KeyCode.PAGE_UP)) {
-            if (time > toggle + 1000) {
+            if (time > toggle + 500) {
                 levelno = (levelno + 1);
                 refresh();
                 toggle = time;
             }
         }
         if (isPressed(KeyCode.PAGE_DOWN)) {
-            if (time > toggle + 1000) {
+            if (time > toggle + 500) {
                 levelno = (levelno - 1);
                 refresh();
                 toggle = time;
@@ -436,7 +436,7 @@ public class Game {
         }
     }
 
-
+    //moves a direction by "value" assuming there is nothing stopping it
     private void movePlayerX(int value) {
         boolean movingRight = value > 0;
         for (int i = 0; i < Math.abs(value); i++) {
@@ -458,13 +458,13 @@ public class Game {
         }
     }
 
-
+    //moves the box
     private void MoveboxX(int value) {
         boolean movingRight = value > 0;
         for (int i = 0; i < Math.abs(5); i++)
             box.setTranslateX(box.getTranslateX() + (movingRight ? 1 : -1));
     }
-
+    //a quick burst of movement
     private void blink(int value) {
         boolean movingRight = value > 0;
         for (int i = 0; i < Math.abs(value); i++) {
@@ -484,7 +484,7 @@ public class Game {
             player.setTranslateX(player.getTranslateX() + (movingRight ? 1 : -1));
         }
     }
-
+    //used for jumping as well as gravity
     private void movePlayerY(int value) {
         boolean movingDown = value > 0;
         for (int i = 0; i < Math.abs(value); i++) {
@@ -515,7 +515,7 @@ public class Game {
             player.setTranslateY(player.getTranslateY() + (movingDown ? 1 : -1));
         }
     }
-
+    //makes the box fall
     private void MoveboxY() {
         if (timeStop == false) {
             for (int i = 0; i < (10); i++) {
@@ -530,14 +530,14 @@ public class Game {
             }
         }
     }
-
+    //attempts to jump
     private void jumpPlayer() {
         if (canJump) {
             playerVelocity = playerVelocity.add(0, -30);
             canJump = false;
         }
     }
-
+    //used for creation of various entitly
     private Node createEntity(int x, int y, int w, int h, Color color) {
         Rectangle entity = new Rectangle(w, h);
         entity.setTranslateX(x);
@@ -547,10 +547,25 @@ public class Game {
         return entity;
 
     }
+    //opens the leaderboard page
+    private void lead(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LB-view.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setFullScreen(true);
+            stage.setResizable(false);
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private boolean isPressed(KeyCode key) {
         return keys.getOrDefault(key, false);
     }
+    //loads up the game screen
     public void load(){
        try {
             initContent();
