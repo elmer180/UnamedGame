@@ -302,7 +302,7 @@ public class Game {
         }
         if (isPressed(KeyCode.H)) {
             if (time > toggle + 300) {
-                if (timeStop == true) {
+                if (timeStop) {
                     timeStop = false;
                 } else {
                     if (levelno != 9) {
@@ -330,9 +330,9 @@ public class Game {
                 refresh();
             }
         }
-        for (Node platform : platforms) {
+        for (Node ignored : platforms) {
             if (player.getTranslateX() + 35 == box.getTranslateX() && (player.getTranslateY() <= box.getTranslateY() + 40) && ((player.getTranslateY() >= box.getTranslateY() - 40))) {
-                if (walking == false) {
+                if (!walking) {
                     MoveboxX(5);
                 } else {
                     player.setTranslateY(player.getTranslateY() - 5);
@@ -340,7 +340,7 @@ public class Game {
 
             }
             if ((player.getTranslateX() == box.getTranslateX() + 35) && (player.getTranslateY() <= box.getTranslateY() + 40) && ((player.getTranslateY() >= box.getTranslateY() - 40))) {
-                if (walking == false) {
+                if (!walking) {
                     MoveboxX(-5);
                 } else {
                     player.setTranslateY(player.getTranslateY() - 5);
@@ -426,7 +426,7 @@ public class Game {
                     }
                 }
             }
-            if (timeStop == false) {
+            if (!timeStop) {
                 if (right) {
                     MoveboxX(1);
                 } else {
@@ -517,7 +517,7 @@ public class Game {
     }
     //makes the box fall
     private void MoveboxY() {
-        if (timeStop == false) {
+        if (!timeStop) {
             for (int i = 0; i < (10); i++) {
                 for (Node platform : platforms) {
                     if (box.getBoundsInParent().intersects(platform.getBoundsInParent())) {

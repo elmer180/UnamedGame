@@ -54,10 +54,6 @@ public class LBController extends Game {
                 swapped = false;
                 for (int j = scores.size() ; j > i ; j--) {
                     try {
-                        System.out.println(j);
-                        System.out.println(scores.get(j));
-                        System.out.println(scores.get(j-2));
-
                         if (Integer.parseInt(scores.get(j)) >= Integer.parseInt(scores.get(j - 2))) {
                             temp = (scores.get(j));
                             tempu = (scores.get(j - 1));
@@ -65,8 +61,8 @@ public class LBController extends Game {
                             scores.set(j - 1, scores.get(j - 3));
                             scores.set(j - 2, (temp));
                             scores.set(j - 3, (tempu));
-                            swapped = true;
                             System.out.println(scores);
+                            swapped = true;
                         }
                     } catch (Exception e) {
                     }
